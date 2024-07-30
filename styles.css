@@ -1,0 +1,147 @@
+body {
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+    background-image: url(images/wood.png);
+    margin: 0px;
+}
+
+.woodHeader{
+    background-color:rgb(255, 255, 255);
+    height:10vh;
+    margin: 0px;
+}
+
+.logo, .woodHeader{
+    justify-content: center;
+    
+}
+.logo{
+    display: flex;
+    height:10vh;
+   
+}
+.financeHeader{
+    background-color: rgb(31, 20, 0);
+    color: white;
+    height: 7vh;
+    padding: 0px;
+}
+h1, .financeHeader{
+    display: flex;
+    justify-content: center;
+}
+.formDiv{
+    height:100vh;
+    width:50vw;
+    justify-content: end;
+    display: flex;
+}
+
+.softPull{
+    display: flex;
+    margin: 3vh;
+    flex-direction: row;
+    
+}
+.video{
+    width: 50vw;
+}
+.form, video{
+    height: 80vh;
+    border-radius: 10px;
+    width: 50vw;
+}
+.footer{
+    height: 20vh;
+
+}
+
+.trailer{
+    position: absolute;
+    width: 100%;
+    height: 30vh;
+    z-index: -2;
+    filter:brightness(50%);
+    object-fit: cover;
+}
+a, h2{
+    font-size: 50px;
+    font-weight: bold;
+    color: white;
+  
+}
+
+.link>a, h2{
+ 
+    padding:50px;
+}
+.video, .buttons{
+    display: flex;
+    flex-direction: column;
+align-items: center;
+ 
+}
+.buttons{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:20vw;
+    
+}
+button{
+   
+    
+    height:5vh;
+}
+#playButton, #muteButton{
+background-color: rgb(31, 20, 0);
+color: white;
+border-radius: 10px;
+font-weight: bold;
+width:10vw;
+font-size:50px;
+}
+
+@media screen and (max-width:430px){
+    .softPull{
+        display: flex;
+        flex-direction: column;
+        width:100vw;
+    }
+    .video, .videoContainer, .formDiv{
+    width:100vw;
+    }
+    #playButton, #muteButton{
+        font-size: 15px;
+        height:10vh;
+        width:40vw;
+    }
+    .form{
+        justify-content: center;
+        width: 100vw;
+    }
+    a{
+        font-size:20px;
+        padding:0px;
+    }
+    .trailer{
+        height:100vh;
+    }
+    .link,.trailer{
+        align-content: center;
+        display:flex;
+        flex-wrap: wrap;
+    }
+    .buttons{
+        width:50vw;
+    }
+    .videoContainer{
+        height:50vh;
+    }
+    #myVideo{
+        height:50vh;
+    }
+   
+}

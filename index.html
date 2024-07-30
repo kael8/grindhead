@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background-image: url("images/wood.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+      .video-container {
+        position: relative;
+      }
+      .play-button,
+      .mute-button {
+        transition: background-color 0.3s ease;
+      }
+      .play-button:hover,
+      .mute-button:hover {
+        background-color: #2563eb; /* Darker blue */
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-900">
+    <div class="woodHeader bg-gray-800 p-2">
+      <div class="logo">
+        <img
+          class="logo w-64 mx-auto"
+          src="images/logogrindheadsmall.png"
+          alt="logo"
+        />
+      </div>
+    </div>
+    <div class="financeHeader text-center py-4 bg-gray-700 text-white">
+      <h1 class="text-3xl font-bold">Financing Portal</h1>
+    </div>
+    <div class="flex justify-center bg-gray-100">
+      <div class="softPull p-4 md:w-1/2">
+        <div class="buttons flex justify-center space-x-4 mb-4">
+          <button
+            id="playButton"
+            class="play-button bg-blue-600 text-white px-6 py-3 rounded shadow-lg"
+          >
+            PLAY VIDEO
+          </button>
+          <button
+            id="muteButton"
+            class="mute-button bg-blue-600 text-white px-6 py-3 rounded shadow-lg"
+          >
+            Mute
+          </button>
+        </div>
+        <div class="flex flex-col justify-center space-y-4 mb-8">
+          <div class="video w-full">
+            <div class="video-container w-full">
+              <video
+                id="myVideo"
+                class="video-background w-full rounded shadow-lg"
+                preload="auto"
+              >
+                <source
+                  src="images/merge_0B15B115-ABBE-4C58-BB91-6D02B4AC07DC.mp4"
+                  type="video/mp4"
+                />
+                <!-- Add additional <source> elements for other formats -->
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          </div>
+          <div class="formDiv w-full mb-8">
+            <iframe
+              class="form w-full h-96 rounded shadow-lg"
+              src="https://app.isoftpull.com/forms/76a82941-26e2-400d-b018-b5aa5ac832ce/2292a991-62d9-4c5a-84a2-ae6533f317d2"
+              title="iSoftpull Form"
+              allowfullscreen="allowfullscreen"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer bg-gray-800 text-white p-4">
+      <div class="link text-center">
+        <a
+          href="https://zfrmz.com/4YTx9kpqTz0hsMClfWDf"
+          class="text-blue-400 underline"
+          >Click here to access the finance application directly</a
+        >
+        <h2 class="mt-4">Questions? Text 407.883.6562</h2>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const video = document.getElementById("myVideo");
+        const playButton = document.getElementById("playButton");
+        const muteButton = document.getElementById("muteButton");
+
+        // Play button functionality
+        playButton.addEventListener("click", () => {
+          video
+            .play()
+            .then(() => {
+              playButton.style.display = "none"; // Hide the play button when video starts
+            })
+            .catch((error) => {
+              console.log("Video playback error:", error);
+            });
+        });
+
+        // Mute button functionality
+        muteButton.addEventListener("click", () => {
+          if (video.muted) {
+            video.muted = false;
+            muteButton.textContent = "Mute";
+          } else {
+            video.muted = true;
+            muteButton.textContent = "Unmute";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
