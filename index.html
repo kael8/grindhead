@@ -9,23 +9,34 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-      body {
-        background-image: url("images/wood.png");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-      }
       .video-container {
         position: relative;
       }
       .play-button,
       .mute-button {
-        transition: background-color 0.3s ease;
+        position: absolute;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 50%;
+        cursor: pointer;
       }
-      .play-button:hover,
-      .mute-button:hover {
-        background-color: #2563eb; /* Darker blue */
+      .play-button {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 20;
+      }
+      .mute-button {
+        bottom: 10px;
+        right: 10px;
+        z-index: 20;
       }
     </style>
   </head>
@@ -43,27 +54,17 @@
       <h1 class="text-3xl font-bold">Financing Portal</h1>
     </div>
     <div class="flex justify-center bg-gray-100">
-      <div class="softPull p-4 md:w-1/2">
-        <div class="buttons flex justify-center space-x-4 mb-4">
-          <button
-            id="playButton"
-            class="play-button bg-blue-600 text-white px-6 py-3 rounded shadow-lg"
-          >
-            PLAY VIDEO
-          </button>
-          <button
-            id="muteButton"
-            class="mute-button bg-blue-600 text-white px-6 py-3 rounded shadow-lg"
-          >
-            Mute
-          </button>
-        </div>
-        <div class="flex flex-col justify-center space-y-4 mb-8">
-          <div class="video w-full">
-            <div class="video-container w-full">
+      <div class="softPull p-8 md:w-full border">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <div class="video w-full md:h-screen rounded shadow-lg relative">
+            <div
+              class="video-container w-full h-full flex items-center justify-center bg-cover bg-center rounded-lg"
+              style="background-image: url('images/wood.png')"
+            >
+              <div class="absolute inset-0 bg-black opacity-50"></div>
               <video
                 id="myVideo"
-                class="video-background w-full rounded shadow-lg"
+                class="video-background w-full md:h-3/4 h-full relative z-10"
                 preload="auto"
               >
                 <source
@@ -73,11 +74,17 @@
                 <!-- Add additional <source> elements for other formats -->
                 Your browser does not support the video tag.
               </video>
+              <button id="playButton" class="play-button">
+                <i class="fas fa-play w-5 h-4"></i>
+              </button>
+              <button id="muteButton" class="mute-button">
+                <i class="fas fa-volume-up"></i>
+              </button>
             </div>
           </div>
-          <div class="formDiv w-full mb-8">
+          <div class="formDiv w-full mb-8 h-screen md:h-screen">
             <iframe
-              class="form w-full h-96 rounded shadow-lg"
+              class="form w-full h-full rounded shadow-lg"
               src="https://app.isoftpull.com/forms/76a82941-26e2-400d-b018-b5aa5ac832ce/2292a991-62d9-4c5a-84a2-ae6533f317d2"
               title="iSoftpull Form"
               allowfullscreen="allowfullscreen"
@@ -98,33 +105,29 @@
       </div>
     </div>
     <script>
-      document.addEventListener("DOMContentLoaded", (event) => {
-        const video = document.getElementById("myVideo");
-        const playButton = document.getElementById("playButton");
-        const muteButton = document.getElementById("muteButton");
+      const video = document.getElementById("myVideo");
+      const playButton = document.querySelector(
+        ".video-container .play-button"
+      );
+      const muteButton = document.querySelector(
+        ".video-container .mute-button"
+      );
 
-        // Play button functionality
-        playButton.addEventListener("click", () => {
-          video
-            .play()
-            .then(() => {
-              playButton.style.display = "none"; // Hide the play button when video starts
-            })
-            .catch((error) => {
-              console.log("Video playback error:", error);
-            });
-        });
+      playButton.addEventListener("click", () => {
+        if (video.paused) {
+          video.play();
+          playButton.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+          video.pause();
+          playButton.innerHTML = '<i class="fas fa-play"></i>';
+        }
+      });
 
-        // Mute button functionality
-        muteButton.addEventListener("click", () => {
-          if (video.muted) {
-            video.muted = false;
-            muteButton.textContent = "Mute";
-          } else {
-            video.muted = true;
-            muteButton.textContent = "Unmute";
-          }
-        });
+      muteButton.addEventListener("click", () => {
+        video.muted = !video.muted;
+        muteButton.innerHTML = video.muted
+          ? '<i class="fas fa-volume-mute"></i>'
+          : '<i class="fas fa-volume-up"></i>';
       });
     </script>
   </body>
